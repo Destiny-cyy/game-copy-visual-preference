@@ -1,0 +1,106 @@
+{
+  "_说明": "空跑演示用配置，全部为编造的假数据。指向 examples 目录里的假数据文件。",
+  "project": {
+    "game_name": "GAME_A",
+    "game_code": "GAME_A",
+    "game_genre": "GENRE_A",
+    "platform": "PLATFORM_A",
+    "channel": "CHANNEL_A",
+    "period": "2026-01-01 ~ 2026-03-31",
+    "focus_month": "2026-03",
+    "language": "zh-CN"
+  },
+  "source": {
+    "mode": "own_ledger",
+    "docid": "<DOC_ID>",
+    "sheet": "<SHEET_NAME>",
+    "bench_docid": "<BENCHMARK_DOC_ID>",
+    "bench_sheet": "<BENCHMARK_SHEET_NAME>",
+    "tag_sheet": "<TAG_SHEET_NAME>",
+    "readonly": true
+  },
+  "fields": {
+    "material_id": "素材ID",
+    "date": "投放日期",
+    "segment": "广告类型",
+    "position": "广告位置",
+    "title": "广告标题",
+    "desc": "广告描述",
+    "image_url": "图片链接",
+    "video_url": "视频链接",
+    "impressions": "曝光UV",
+    "clicks": "点击UV",
+    "game": "游戏名"
+  },
+  "taxonomy": {
+    "style": ["风格A_写实渲染", "风格B_概念原画", "风格C_平面插画", "风格D_UI展示", "风格E_实机截图"],
+    "elements": ["单角色立绘", "多角色拼条", "角色战斗", "BOSS怪物", "场景风景", "游戏内地图", "装备道具", "大字文案", "实机", "奖励物"],
+    "benefit": ["堆叠式", "独立圈圈式", "单品聚焦", "大字福利文案", "无福利"],
+    "segments": ["分层A_纯新", "分层B_包名包", "分层C_老用户", "分层D_兴趣标签"],
+    "confidence": ["高", "中", "低"],
+    "element_max": 3,
+    "element_separator": "+",
+    "copy_main": ["卖点A_版本节点", "卖点B_福利奖品", "卖点C_职业战斗", "卖点D_构筑自由", "卖点E_刷宝掉落", "卖点F_价格优惠", "卖点G_品牌背书", "卖点H_社交邀友"],
+    "copy_hook": ["钩子A_抽实物", "钩子B_游戏内福利", "钩子C_限时紧迫", "钩子D_稀缺资格", "钩子E_邀友裂变", "钩子F_价格锚点"],
+    "copy_tone": ["语气A_悬念反差", "语气B_玩梗口语", "语气C_官方权威", "语气D_情怀召唤", "语气E_硬核渲染"],
+    "copy_confidence": ["高", "中", "低"],
+    "copy_multi_separator": ";"
+  },
+  "nodes": {
+    "keywords": { "节点A_周年庆": ["周年", "庆典"] },
+    "ranges": {
+      "节点C_档期一": ["2026-01-10", "2026-01-20"],
+      "节点D_档期二": ["2026-03-05", "2026-03-15"]
+    },
+    "default": "日常"
+  },
+  "benchmark": {
+    "target": "GAME_A",
+    "aliases": ["GAME_A", "GAME_A_ALIAS", "GAME_A_OLD_NAME"],
+    "peers": ["GAME_B", "GAME_C"],
+    "months": ["2026-01", "2026-02", "2026-03"],
+    "game_min_impressions": 100000,
+    "material_min_impressions": 10000
+  },
+  "thresholds": {
+    "min_sample": 3,
+    "top_material_min_impressions": 50000,
+    "reuse_bands": [1, 2, 3, 4]
+  },
+  "output": {
+    "data_dir": "./examples/out",
+    "image_dir": "./examples/out/素材图",
+    "cdn_base": "https://cdn.example.com",
+    "referer": "https://example.com/",
+    "link_policy": "cdn_only"
+  },
+  "report": {
+    "narrative": "neutral",
+    "show_rank": true,
+    "show_head_game_names": false,
+    "peer_compare_requires_impressions": true
+  },
+  "copy": {
+    "_说明": "文案卖点 × 图片素材 × 用户偏好 交叉分析配置。全部为示例占位，换项目只改这里，脚本不动。",
+    "segment_map": [
+      {"match": ["老用户", "老客", "回流"], "to": "分层C_老用户"},
+      {"match": ["新用户", "新进", "纯新"], "to": "分层A_纯新"},
+      {"match": ["标签", "兴趣"], "to": "分层D_兴趣标签"}
+    ],
+    "core_segments": ["分层A_纯新", "分层C_老用户", "分层D_兴趣标签"],
+    "unlabeled": "未标注",
+    "other": "其他",
+    "strip_markers": ["文案："],
+    "bridge": {"enabled": true},
+    "chart_topn": 3,
+    "chart_dims": [
+      {"key": "copy_main", "title": "主卖点", "note": "主卖点单选，判文案主句；仅统计有文案标签的记录。"},
+      {"key": "copy_hook", "title": "行动钩子", "note": "行动钩子多选，一条文案可命中多个，组间样本会重叠。"},
+      {"key": "benefit", "title": "福利呈现", "note": "图片维度（文案桥挂接的视觉标签），仅统计挂接成功的记录。"},
+      {"key": "style", "title": "画风", "note": "图片维度（文案桥挂接的视觉标签），仅统计挂接成功的记录。"}
+    ],
+    "segment_colors": {"分层A_纯新": "#58a6ff", "分层C_老用户": "#e3b341", "分层D_兴趣标签": "#3fb950"},
+    "segment_display": {"分层A_纯新": "新用户 / 纯新", "分层C_老用户": "老用户 / 回流", "分层D_兴趣标签": "兴趣标签用户"},
+    "short_labels": {}
+  }
+}

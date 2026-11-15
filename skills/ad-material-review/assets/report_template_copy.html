@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__GAME_NAME__ · 文案卖点 × 图片素材 用户偏好分析</title>
+<!-- 画图库内嵌：HTML 必须离线自包含（双击 / 转发 / 断网都能出图），零 CDN 外链 -->
+<script>__ECHARTS_LIB__</script>
+<style>
+  :root{--bg:#0d1117;--card:#161b22;--card2:#1c2330;--line:#2d3748;--txt:#e6edf3;--sub:#9aa7b5;--green:#3fb950;--red:#f85149;--gold:#e3b341;--blue:#58a6ff;--purple:#bc8cff;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--txt);font-family:"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65;padding:32px 20px;}
+  .wrap{max-width:1120px;margin:0 auto;}
+  .game{font-size:13px;color:var(--sub);letter-spacing:1px;}
+  h1{font-size:25px;margin:4px 0 6px;}
+  .meta{font-size:12.5px;color:var(--sub);}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 20px;}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-size:13.5px;}
+  .chip b{font-size:16px;}
+  .up{color:var(--green);font-weight:600;}.down{color:var(--red);font-weight:600;}.gold{color:var(--gold);font-weight:600;}.blue{color:var(--blue);font-weight:600;}
+  h2{font-size:17px;margin:32px 0 14px;padding-left:10px;border-left:4px solid var(--blue);}
+  .cbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;font-size:14.5px;margin-bottom:12px;}
+  .cbox p{margin-top:6px;color:var(--sub);font-size:13px;}
+  .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:20px;margin-right:8px;font-weight:600;}
+  .t-g{background:rgba(63,185,80,.15);color:var(--green);}.t-b{background:rgba(88,166,255,.15);color:var(--blue);}
+  .t-p{background:rgba(188,140,255,.15);color:var(--purple);}.t-y{background:rgba(227,179,65,.15);color:var(--gold);}.t-r{background:rgba(248,81,73,.15);color:var(--red);}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:12px;overflow:hidden;margin-bottom:10px;}
+  th{background:var(--card2);color:var(--sub);font-weight:600;text-align:left;padding:10px 14px;font-size:12.5px;}
+  td{padding:10px 14px;border-top:1px solid var(--line);}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .good{color:var(--green);font-weight:600;}.bad{color:var(--red);font-weight:600;}.warn{color:var(--gold);}
+  .note{font-size:12px;color:var(--sub);margin-top:8px;}
+  .chartcols{display:flex;margin:6px 0 2px;}
+  .chartcols>div{flex:1;text-align:center;font-weight:600;font-size:14px;}
+  .chartcols small{display:block;font-size:11.5px;color:var(--sub);font-weight:400;}
+  .footer{margin-top:40px;font-size:11.5px;color:var(--sub);border-top:1px solid var(--line);padding-top:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="game">__GAME_NAME__ · __PLATFORM__</div>
+  <h1>文案卖点 × 图片素材 · 用户偏好结论报告</h1>
+  <div class="meta">口径声明：__SCOPE__</div>
+
+  <div class="chips">
+    <div class="chip">核心人群 <b class="blue">__CORE_N__ 类</b></div>
+    <div class="chip">曝光记录 <b class="blue">__REC_ROWS__ 条</b></div>
+    <div class="chip">唯一素材ID <b class="blue">__UNIQ_MAT__ 张</b></div>
+    <div class="chip">图片标签挂接率 <b class="gold">__BRIDGE_RATE__%</b></div>
+    __SEG_CHIPS__
+  </div>
+
+  <div class="cbox" style="border-left:4px solid var(--gold)">
+    <span class="tag t-y">⚠️ 先读口径，再看结论</span>
+    <div>① 不同人群的绝对 CTR 差距来自<b>人群精准度</b>，不是素材好坏；本报告所有「偏好」结论都是<b>同类人群内部比较</b>，或<b>相对该人群自身基线</b>（图中红虚线）。② 一条素材拆给多类用户的行，文案/图按<b>继承首行素材</b>处理。③ 图片标签来自「文案桥」挂接旧台账，挂接率 __BRIDGE_RATE__%，未挂接记录不参与图片维度；<b>文案维度不受影响</b>（两套独立）。④ n &lt; __MIN_SAMPLE__ 的组均标注「样本不足」，只作方向性参考。</div>
+  </div>
+
+  <h2>一、核心结论</h2>
+  __CONCLUSIONS__
+
+  <h2>二、直观分析图（每类人群一列 · 红虚线 = 该人群基线）</h2>
+  <div class="meta" style="margin-bottom:8px">每张图展示各类人群内部 TOP-__TOPN__ 标签的加权 CTR；条形右侧为 CTR 与样本数 n；超过红虚线 = 跑赢该类人群平均水平。维度与人群数由 config 驱动。</div>
+  __CHART_SECTIONS__
+
+  <h2>三、同素材跨人群表现（通吃素材甄别）</h2>
+  <div class="meta" style="margin-bottom:8px">同一素材投给 ≥2 类人群的记录组共 __CROSS_N__ 组；pp = 相对该人群基线的提升（百分点）。</div>
+  <table><tr><th>素材ID</th><th>画风</th><th>福利呈现</th>__CROSS_HEAD__</tr>__CROSS_ROWS__</table>
+
+  <h2>四、标签体系与复核说明</h2>
+  <table>
+    <tr><th>维度</th><th>类型</th><th>取值（来自 config.taxonomy）</th></tr>
+    <tr><td>主卖点</td><td>单选(判主句)</td><td>__APPENDIX_MAIN__</td></tr>
+    <tr><td>行动钩子</td><td>多选(判全句)</td><td>__APPENDIX_HOOK__</td></tr>
+    <tr><td>语气句式</td><td>多选(判全句)</td><td>__APPENDIX_TONE__</td></tr>
+  </table>
+  <div class="cbox"><span class="tag t-y">复核提示</span><div>文案置信度「中」的条目建议业务侧抽查；同一文案命中多个素材ID 的挂接行置信度「中」；所有「样本不足」组不宜直接作为投放决策依据。文案标签逐条人工判读，图片标签逐张多模态看图，两套体系独立。</div></div>
+
+  <div class="footer">本报告为通用工作流产物：所有取值来自 config，示例数据为编造，不含任何真实业务数据。CTR 一律曝光加权（SUM点击/SUM曝光）。数据源为只读快照，原表未做任何修改。生成于 __GEN_DATE__。</div>
+</div>
+
+<script>
+var ORDER = __ORDER__;
+var DISPLAY = __DISPLAY__;
+var CHART_TITLES = __CHART_TITLES__;
+var CHART_DATA = __CHART_DATA__;
+function draw(cid, D){
+  var el = document.getElementById(cid);
+  if(!el) return;
+  el.innerHTML = '';
+  var ch = echarts.init(el);
+  var N = ORDER.length;
+  var colW = Math.floor(1080 / N);
+  var grids=[], xAxes=[], yAxes=[], series=[];
+  ORDER.forEach(function(u, i){
+    var d = D[u];
+    grids.push({left: 45 + colW*i, top: 30, height: 320, width: colW - 75});
+    xAxes.push({gridIndex:i, type:'value',
+      axisLabel:{formatter:'{value}%', color:'#9aa7b5', fontSize:10},
+      splitLine:{lineStyle:{color:'#2d3748'}},
+      max:function(v){return Math.max(v.max*1.5, (d.base||0)*1.7, 0.1);}});
+    yAxes.push({gridIndex:i, type:'category', data:d.names,
+      axisLabel:{color:'#e6edf3', fontSize:11.5, width:95, overflow:'truncate'},
+      axisTick:{show:false}, axisLine:{lineStyle:{color:'#2d3748'}}});
+    series.push({type:'bar', xAxisIndex:i, yAxisIndex:i,
+      data:d.ctrs.map(function(c){return {value:c};}),
+      itemStyle:{color:d.color, borderRadius:[0,4,4,0]}, barWidth:22,
+      label:{show:true, position:'right', color:'#e6edf3', fontSize:10.5,
+        formatter:function(p){return p.value.toFixed(2)+'% (n='+d.ns[p.dataIndex]+')';}},
+      markLine:{symbol:'none', lineStyle:{type:'dashed', color:'#f85149', width:1.2},
+        label:{formatter:'基线 '+(d.base||0).toFixed(2)+'%', color:'#f85149', fontSize:10, position:'end'},
+        data:[{xAxis:d.base||0}]}});
+  });
+  ch.setOption({backgroundColor:'transparent', legend:{show:false}, grid:grids, xAxis:xAxes, yAxis:yAxes, series:series});
+  window.addEventListener('resize', function(){ch.resize();});
+}
+__DRAW_CALLS__
+</script>
+</body>
+</html>
