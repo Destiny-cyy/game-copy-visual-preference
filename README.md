@@ -1,18 +1,12 @@
-# 文案卖点 × 图片素材用户偏好分析 · 分发版（分享包）
+# 文案卖点 × 图片素材用户偏好分析
 
 > **版本 v1.2.0（偏好分析进阶版）** · 变更记录见 `CHANGELOG.md` · 使用许可见 `LICENSE`
 >
-> 一套**换个游戏、换个投放平台、换个品类也能照着跑**的业务工作流，主线聚焦
-> **「文案卖点 × 图片素材 × 用户偏好」交叉分析**：给文案和图片分别打标，回答「哪类卖点 / 哪类图，对哪类用户更有效」。
-> 由实际使用过的多个 skill 合并、脱敏、抽象而来，同时覆盖「用户研究 / 用户分析 / 素材管理 / 游戏数据复盘」四类工作，
-> 并保留大盘对比 / 复用衰减 / 缺口测算 / 资源需求表 / 复盘框架等配套能力。
-> **本包不含具体项目绑定的游戏/平台/客户标识、真实业务数据、内部文档 ID 或人名**；示例数据与数字均为合成值。可选在线表格连接器和第三方图表库已在下文单独标注。
->
-> 拿到这个包的人可以放心用、放心改、放心转发：许可、版本、维护边界、分发前自检都写在下面第十一节。
->
-> ⭐ **v1.2.0 新增主线能力**：文案标签体系、人群归一、素材块继承、文案桥挂接旧图标签、
-> 各人群 × 卖点/钩子/图片维度加权 CTR、三联图结论报告（**离线自包含**：双击/转发/断网都能出图）。
-> 详见 `skills/ad-material-review/references/copy-analysis.md`。
+这套工作流分别标注文案和图片，再按用户分层比较卖点、行动钩子和视觉标签的加权 CTR。游戏、平台和标签体系都由配置文件提供，因此同一套分析流程可以迁移到不同项目。
+
+仓库还包含大盘对比、复用衰减、素材缺口和资源需求表。示例数据均为合成值，不含真实游戏、平台、客户、内部文档 ID 或人员信息。在线表格连接器是可选通道；图表库的许可见 `THIRD_PARTY_NOTICES.md`。
+
+v1.2.0 增加了文案标签、人群归一、素材继承和三联图报告。方法与字段约定见 `skills/ad-material-review/references/copy-analysis.md`。
 
 ```mermaid
 flowchart LR
@@ -25,13 +19,21 @@ flowchart LR
 
 **场景模板**：游戏、平台、渠道和对标对象在 `examples/config.demo.json` 中均使用可替换占位值；示例指标是合成数据，不代表真实项目。在线表格是可选连接器示例，不是离线分析的前置条件。
 
+## 报告预览
+
+[打开完整 HTML 场景报告](examples/copy-visual-preference-report.html)
+
+![文案卖点与用户偏好图表](docs/images/copy-visual-preference-report.png)
+
+截图由仓库自带的分析与报告脚本生成，使用 `examples/` 中的合成数据。图中的人群和指标只能在各自口径内比较。
+
 ---
 
-## 一、这个包是什么、能帮你做什么
+## 一、适用问题
 
-如果你在渠道发行 / 投放 / 素材运营岗，大概率要回答这些问题：
+这套工作流适合处理以下问题：
 
-- ⭐ **新用户 / 老用户 / 标签用户分别吃哪套文案卖点、哪类图？哪些卖点通吃？** → **文案卖点 × 图片素材用户偏好分析（本包主线）**
+- 新用户、老用户和标签用户分别偏好哪些文案卖点与图片方向？ → 文案卖点 × 图片素材用户偏好分析
 - 哪种画风的素材更吸引人？画面上放不放福利、怎么放有没有用？ → **素材复盘**
 - 老用户 / 新用户分别吃哪一套？下轮资源怎么分？ → **用户分层分析**
 - 一张图反复投会不会越投越没效果？跟平台上别的游戏比算什么水平？ → **大盘对比 / 复用衰减**
@@ -39,13 +41,13 @@ flowchart LR
 - 要在某平台申请资源位、向合作方收一堆素材，怎么把规则和交期讲清楚？ → **资源需求表**
 - 一堆资料要复盘整理，怎么不跑偏、不留错口径？ → **复盘框架**
 
-这个包把「怎么回答这些问题」固化成 **3 个可直接安装的 Skill + 一套配置文件 + 12 个脚本（含 2 个验证/报告）+ 方法论文档 + 报告模板 + 随包自带画图库**。
+仓库包含 3 个可安装 Skill、一套配置、12 个分析与验证脚本、方法文档、报告模板和离线图表库。
 
 ### 主题 → 包里对应什么
 
 | 你说的主题 | 包里落在哪 |
 |---|---|
-| ⭐ **文案卖点 × 图片素材用户偏好分析**（主线） | `ad-material-review/references/copy-analysis.md`（方法）+ `scripts/analyze_copy.py`（归一/继承/挂接/交叉）+ `scripts/build_report_copy.py`（三联图报告）+ `config.copy`（配置） |
+| **文案卖点 × 图片素材用户偏好分析**（主线） | `ad-material-review/references/copy-analysis.md`（方法）+ `scripts/analyze_copy.py`（归一/继承/挂接/交叉）+ `scripts/build_report_copy.py`（三联图报告）+ `config.copy`（配置） |
 | 用户研究 / 用户分析 | `references/user-analysis.md`（分层 × 文案卖点 × 图片标签 × CTR）+ `analyze.py` 分层维度 |
 | 素材管理 | `ad-material-review`（打标、索引、重命名、缺口）+ `channel-resource-table`（收素材、排交付） |
 | 游戏数据复盘 | `ad-material-review`（七阶段复盘全流程、大盘 Benchmark、复用衰减、报告） |
@@ -57,9 +59,9 @@ flowchart LR
 
 ## 二、三个 Skill 一览
 
-| Skill | 一句话 | 主要产物 |
+| Skill | 用途 | 主要产物 |
 |---|---|---|
-| **ad-material-review** ⭐ | **文案卖点 × 图片素材 × 用户偏好 交叉分析为主线**，兼顾投放素材复盘与效果归因 | 文案/图片两套打标明细、各人群偏好三联图 HTML 报告、多维度 CTR 归因、大盘双口径对比、复用衰减、缺口测算 |
+| **ad-material-review** | 文案卖点、图片素材与用户偏好交叉分析，同时处理投放素材复盘与效果归因 | 文案/图片两套打标明细、各人群偏好三联图 HTML 报告、多维度 CTR 归因、大盘双口径对比、复用衰减、缺口测算 |
 | **channel-resource-table** | 渠道资源/素材需求表制作 | 成对交付的「全景表」（内部）+「需求表」（对外） |
 | **retrospective** | 复盘 / 整理 / 总结的弹性框架 | 不产出文件，规定「这类活该怎么推进」 |
 
@@ -113,7 +115,7 @@ flowchart LR
         ├── SKILL.md + 说明文档.md
 ```
 
-**每个 Skill 都配了一份 `说明文档.md`**（大白话 + 图示，不堆术语），是给业务同学看的主入口；`SKILL.md` 是给 Agent 看的执行规矩。
+每个 Skill 都配有 `说明文档.md`，用图示和业务语言解释用法；`SKILL.md` 保存 Agent 执行时遵守的规则。
 
 ---
 
@@ -132,7 +134,7 @@ python skills/ad-material-review/scripts/analyze.py \
   --csv examples/tagged.sample.csv \
   --out examples/out/analysis.json
 
-# ⭐ 主线：文案卖点 × 图片素材用户偏好分析（三步，全离线）
+# 主线：文案卖点 × 图片素材用户偏好分析（三步，全离线）
 python skills/ad-material-review/scripts/analyze_copy.py \
   --config examples/config.demo.json \
   --planning examples/copy_planning.sample.csv \
@@ -166,13 +168,13 @@ node skills/ad-material-review/scripts/verify_html_charts.js examples/out/copy_r
 4. **一份平台规则文档**（用 `channel-resource-table` 时）
 5. **复制配置文件**：`cp skills/ad-material-review/config/config.example.json skills/ad-material-review/config/config.json`，按 `config.schema.md` 填真实值
 
-> ⚠️ 原表一律只读。所有写操作都指向**新建**子表/文档。
+> 原表一律只读。所有写操作都指向新建的子表或文档。
 
 ---
 
 ## 六、怎么迁移到别的游戏 / 平台（核心设计）
 
-**一句话：所有游戏专属信息只写在一份 `config.json` 里，换游戏 = 换配置，不动脚本和文档。**
+所有项目专属信息都写入 `config.json`。迁移到新项目时替换配置，不改脚本和文档。
 
 ```
         config/config.json
@@ -244,7 +246,7 @@ A：只改 `config.fields` 的「右边」（源表真实列名），脚本内�
 A：不强制。脚本里的在线表格调用是可选通道；把数据导出成 `master.csv` 形态后，分析与报告环节完全可离线跑。通过环境变量 `TABLE_TOOL_CLI` 可把默认的 `table-cli` 切换为使用方自己的兼容命令。
 
 **Q：为什么有两个 `说明文档.md` 和 `SKILL.md`？**
-A：`说明文档.md` 给人看（大白话、图示）；`SKILL.md` 给 Agent 看（执行规矩、硬性规则）。
+A：`说明文档.md` 面向使用者，包含业务说明和图示；`SKILL.md` 面向 Agent，保存执行规则。
 
 ---
 
